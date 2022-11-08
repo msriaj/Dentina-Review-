@@ -14,7 +14,7 @@ import {
 import { app } from "./firebase.config";
 
 export const AuthContext = createContext();
-
+export const serverUrl = "http://localhost:5000";
 const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();

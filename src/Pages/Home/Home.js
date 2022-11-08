@@ -2,6 +2,8 @@ import React from "react";
 import Features from "../../Components/Features/Features";
 import Hero from "../../Components/Hero/Hero";
 import SingleService from "../../Components/SingelService/SingelService";
+import { PhotoProvider } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const Home = () => {
   return (
@@ -14,11 +16,13 @@ const Home = () => {
           My <span className="text-sky-600">Services</span>{" "}
         </h2>
       </div>
-      <div className="md:w-10/12 mx-auto py-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <SingleService />
-        <SingleService />
-        <SingleService />
-      </div>
+      <PhotoProvider>
+        <div className="md:w-10/12 mx-auto py-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <SingleService />
+          <SingleService />
+          <SingleService />
+        </div>
+      </PhotoProvider>
     </>
   );
 };

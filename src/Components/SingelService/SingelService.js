@@ -1,21 +1,23 @@
 import React from "react";
+import { PhotoView } from "react-photo-view";
 
 const SingleService = () => {
   return (
     <div>
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <img
-          className="p-8 bg-blue-100 rounded-t-lg"
-          src="https://flowbite.com/docs/images/products/apple-watch.png"
-          alt="productimage"
-        />
+        <PhotoView src="https://flowbite.com/docs/images/products/apple-watch.png">
+          <img
+            className="p-8 bg-blue-100 rounded-t-lg"
+            src="https://flowbite.com/docs/images/products/apple-watch.png"
+            alt="productimage"
+          />
+        </PhotoView>
 
         <div className="px-5 pt-5 pb-5">
-          <a href="#">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              Teath Cleaning
-            </h5>
-          </a>
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            Teath Cleaning
+          </h5>
+
           <p className="text-gray-400">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
             dolor neque quaerat,

@@ -1,15 +1,42 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext, serverUrl } from "../../Context/AuthContext";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
   const [photolink, setPhotoLink] = useState(null);
+
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const descriptions = form.descriptions.value;
+    const thumbURL = form.thumbURL.value;
+    const price = form.price.value;
+    const createdDate = new Date();
+
+    const data = {
+      title,
+      descriptions,
+      thumbURL,
+      price,
+      createdDate,
+    };
+
+    fetch(`${serverUrl}/addservice`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div className="bg-blue-50 py-12 md:px-12">
       {" "}
       <div className="md:w-7/12 mx-auto">
         <div className="mt-5 md:col-span-2 md:mt-0">
-          <form action="#" method="POST">
+          <form onSubmit={handelSubmit}>
             <div className="  sm:overflow-hidden sm:rounded-md shadow-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                 <h1 className="font-bold text-gray-600">Add Service</h1>
@@ -112,7 +139,6 @@ const AddService = () => {
                       <input
                         type="text"
                         name="price"
-                        id=""
                         className="block w-full bg-gray-100 shadow  outline-sky-100 p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Price"
                       />

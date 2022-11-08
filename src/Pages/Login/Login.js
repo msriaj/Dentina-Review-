@@ -61,7 +61,7 @@ const Login = () => {
           >
             <div className="space-y-4">
               <div>
-                <label for="email" className="block mb-2 text-sm">
+                <label htmlFor="email" className="block mb-2 text-sm">
                   Email address
                 </label>
                 <input
@@ -74,7 +74,7 @@ const Login = () => {
               </div>
               <div>
                 <div className="flex justify-between mb-2">
-                  <label for="password" className="text-sm">
+                  <label htmlFor="password" className="text-sm">
                     Password
                   </label>
                   <a

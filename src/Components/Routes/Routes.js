@@ -5,6 +5,7 @@ import Login from "../../Pages/Login/Login";
 import MyReview from "../../Pages/MyReview/MyReview";
 import Profile from "../../Pages/Profile.js/Profile";
 import Register from "../../Pages/Register/Register";
+import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import Services from "../../Pages/Services/Services";
 import Main from "../Layout/Main";
 import PrivateRoute from "./PrivateRoute";
@@ -39,6 +40,10 @@ export const routes = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/service/:id",
+        element: <ServiceDetails />,
       },
       {
         path: "/services",

@@ -21,8 +21,8 @@ const ServiceDetails = () => {
               <b>Descriptions :</b> {descriptions}
             </p>
           </div>
-          <Reviews serviceId={_id} />
           <AddReviews serviceId={_id} />
+          <Reviews serviceId={_id} />
         </div>
       </div>
     </div>

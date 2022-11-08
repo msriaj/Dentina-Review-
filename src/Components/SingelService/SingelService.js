@@ -1,27 +1,26 @@
 import React from "react";
 import { PhotoView } from "react-photo-view";
+import { Link } from "react-router-dom";
 
-const SingleService = () => {
+const SingleService = ({ info }) => {
+  const { _id, title, descriptions, thumbURL, price, createdAt } = info;
   return (
     <div>
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <PhotoView src="https://flowbite.com/docs/images/products/apple-watch.png">
           <img
-            className="p-8 bg-blue-100 rounded-t-lg"
-            src="https://flowbite.com/docs/images/products/apple-watch.png"
+            className=" h-52 w-full bg-blue-100 rounded-t-lg"
+            src={thumbURL}
             alt="productimage"
           />
         </PhotoView>
 
         <div className="px-5 pt-5 pb-5">
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-            Teath Cleaning
+            {title}
           </h5>
 
-          <p className="text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-            dolor neque quaerat,
-          </p>
+          <p className="text-gray-400">{descriptions.slice(0, 100)}</p>
           <div className="flex items-center mt-2.5 mb-5">
             <svg
               aria-hidden="true"
@@ -79,14 +78,15 @@ const SingleService = () => {
           </div>
           <div className="flex justify-between items-center">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
-              $599
+              ${price}
             </span>
-            <a
-              href="/"
+
+            <Link
+              to={`/service/${_id}`}
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               See Details
-            </a>
+            </Link>
           </div>
         </div>
       </div>

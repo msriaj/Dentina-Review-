@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
+import { notify } from "../../utils/notify";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
+
   const [photolink, setPhotoLink] = useState(null);
 
   const handelSubmit = (e) => {
@@ -12,14 +14,12 @@ const AddService = () => {
     const descriptions = form.descriptions.value;
     const thumbURL = form.thumbURL.value;
     const price = form.price.value;
-    const createdDate = new Date();
 
     const data = {
       title,
       descriptions,
       thumbURL,
       price,
-      createdDate,
     };
 
     fetch(`${serverUrl}/addservice`, {
@@ -27,16 +27,19 @@ const AddService = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.acknowledged) {
+          notify("Successfully submitted !");
+        }
+      });
   };
 
   return (
     <div className="bg-blue-50 py-12 md:px-12">
-      {" "}
       <div className="md:w-7/12 mx-auto">
         <div className="mt-5 md:col-span-2 md:mt-0">
-          <form onSubmit={handelSubmit}>
+          <form onSubmit={handelSubmit} className="bg-white">
             <div className="  sm:overflow-hidden sm:rounded-md shadow-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                 <h1 className="font-bold text-gray-600">Add Service</h1>

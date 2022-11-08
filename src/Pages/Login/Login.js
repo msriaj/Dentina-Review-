@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from "react";
 import Lottie from "lottie-react";
 import loginAnimation from "./login.json";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../Context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import { notify } from "../../utils/notify";
 
 const Login = () => {
   const location = useLocation();
@@ -12,25 +12,12 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const notify = () => {
-    toast.success("Logged Success", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
   const { user, googleSignIn } = useContext(AuthContext);
 
   const googleSignHandler = () => {
     googleSignIn()
       .then((result) => {
-        notify();
+        notify("Login successful !");
         navigate(nextUrl);
       })
       .catch((error) => {});
@@ -124,18 +111,6 @@ const Login = () => {
             </div>
           </form>
         </div>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
       </div>
     </div>
   );

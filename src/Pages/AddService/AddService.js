@@ -31,6 +31,8 @@ const AddService = () => {
       .then((result) => {
         if (result.acknowledged) {
           notify("Successfully submitted !");
+          form.reset();
+          setPhotoLink(null);
         }
       });
   };

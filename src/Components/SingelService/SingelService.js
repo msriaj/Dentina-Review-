@@ -3,11 +3,11 @@ import { PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
 
 const SingleService = ({ info }) => {
-  const { _id, title, descriptions, thumbURL, price, createdAt } = info;
+  const { _id, title, descriptions, thumbURL, price } = info;
   return (
     <div>
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <PhotoView src="https://flowbite.com/docs/images/products/apple-watch.png">
+        <PhotoView src={thumbURL}>
           <img
             className=" h-52 w-full bg-blue-100 rounded-t-lg"
             src={thumbURL}

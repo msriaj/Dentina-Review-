@@ -1,3 +1,4 @@
+import { serverUrl } from "../../Context/AuthContext";
 import AddService from "../../Pages/AddService/AddService";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Home from "../../Pages/Home/Home";
@@ -44,6 +45,7 @@ export const routes = createBrowserRouter([
       {
         path: "/service/:id",
         element: <ServiceDetails />,
+        loader: ({ params }) => fetch(`${serverUrl}/service/${params.id}`),
       },
       {
         path: "/services",

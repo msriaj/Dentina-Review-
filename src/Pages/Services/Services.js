@@ -13,12 +13,13 @@ const Services = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-blue-50">
       {" "}
-      <div>
-        <h2 className="text-center text-3xl font-bold text-gray-500 mt-12">
-          My <span className="text-sky-600">Services</span>{" "}
-        </h2>
+      <div className="space-y-2 text-center pt-12">
+        <h2 className="text-3xl font-bold">My Services</h2>
+        <p className="font-serif text-sm dark:text-gray-400">
+          Qualisque erroribus usu at, duo te agam soluta mucius.
+        </p>
       </div>
       <PhotoProvider>
         <div className="md:w-10/12 mx-auto py-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

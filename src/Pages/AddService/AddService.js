@@ -1,23 +1,26 @@
-import React, { useContext, useState } from "react";
+import JoditEditor from "jodit-react";
+import React, { useContext, useRef, useState } from "react";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
+import "./AddService.css";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
-
   const [photolink, setPhotoLink] = useState(null);
+
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
 
   const handelSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
-    const descriptions = form.descriptions.value;
     const thumbURL = form.thumbURL.value;
     const price = form.price.value;
 
     const data = {
       title,
-      descriptions,
+      descriptions: content,
       thumbURL,
       price,
     };
@@ -45,8 +48,8 @@ const AddService = () => {
             <div className="  sm:overflow-hidden sm:rounded-md shadow-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                 <h1 className="font-bold text-gray-600">Add Service</h1>
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="col-span-3 sm:col-span-2">
+                <div className="">
+                  <div className="">
                     <label
                       htmlFor="company-website"
                       className="block text-sm font-medium text-gray-700"
@@ -60,30 +63,28 @@ const AddService = () => {
                         id="title"
                         className="block w-full bg-gray-100 shadow  outline-sky-100 p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Service Title"
+                        required
                       />
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="col-span-3 sm:col-span-2">
-                    <label
-                      htmlFor="company-website"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                <div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
                       Service Descriptions
                     </label>
                     <div className="mt-1 flex rounded-md shadow-sm">
-                      <textarea
-                        name="descriptions"
-                        id="descriptions"
-                        className="block w-full bg-gray-100 shadow  outline-sky-100 p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Details About Your Service"
-                      ></textarea>
+                      <JoditEditor
+                        ref={editor}
+                        value={content}
+                        tabIndex={1} // tabIndex of textarea
+                        onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                      />
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="col-span-3 sm:col-span-2">
+                <div className="">
+                  <div className="">
                     <label
                       htmlFor="company-website"
                       className="block text-sm font-medium text-gray-700"
@@ -98,40 +99,24 @@ const AddService = () => {
                         onBlur={(e) => setPhotoLink(e.target.value)}
                         className="bldisplayNameock w-full bg-gray-100 shadow  outline-sky-100 p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder={user.uid && user?.photoURL}
+                        required
                       />
                     </div>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Preview Thumb
-                  </label>
-                  <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                    {!photolink ? (
-                      <div className="space-y-1 text-center">
-                        <svg
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          stroke="currentColor"
-                          fill="none"
-                          viewBox="0 0 48 48"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-
-                        <p className="text-xs text-gray-500">PNG, JPG, GIF</p>
-                      </div>
-                    ) : (
-                      <img src={photolink} alt="" />
-                    )}
+                {photolink && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Preview Thumb
+                    </label>
+                    <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                      {" "}
+                      <img src={photolink} alt="" />{" "}
+                    </div>{" "}
                   </div>
-                </div>
+                )}
+
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
                     <label
@@ -142,10 +127,11 @@ const AddService = () => {
                     </label>
                     <div className="mt-1 flex rounded-md shadow-sm">
                       <input
-                        type="text"
+                        type="number"
                         name="price"
                         className="block w-full bg-gray-100 shadow  outline-sky-100 p-2 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Price"
+                        required
                       />
                     </div>
                   </div>

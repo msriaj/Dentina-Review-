@@ -1,20 +1,20 @@
-import React, { createContext, useEffect, useState } from "react";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  sendPasswordResetEmail,
+  getAuth,
   GithubAuthProvider,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
 import { app } from "./firebase.config";
 
 export const AuthContext = createContext();
-export const serverUrl = "http://localhost:5000";
+export const serverUrl = "https://dentina-msriaj.vercel.app";
 const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();

@@ -17,6 +17,7 @@ const AddReviews = ({ serviceId }) => {
       serviceId,
       review,
       userName: user.displayName,
+      email: user.email,
       profile: user.photoURL,
       rating,
     };

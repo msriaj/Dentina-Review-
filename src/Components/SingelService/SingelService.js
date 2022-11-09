@@ -30,7 +30,12 @@ const SingleService = ({ info }) => {
             {title}
           </h5>
 
-          <p className="text-gray-400">{descriptions.slice(0, 100)}</p>
+          <p className="text-gray-400">
+            {descriptions
+              .replace("&nbsp;", " ")
+              .replace(/(<([^>]+)>)/gi, " ")
+              .slice(0, 100)}
+          </p>
           <div className="flex items-center mt-2.5 ">
             {reviewsData && (
               <ReactStars

@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import AddReviews from "../../Components/AddReviews/AddReviews";
@@ -18,7 +19,7 @@ const ServiceDetails = () => {
             <b className="font-bold">Price : {price}</b>
           </div>
           <div className="mb-12">
-            <p className="text-gray-500">{descriptions}</p>
+            <p className="text-gray-500">{parse(descriptions)}</p>
           </div>
           <AddReviews serviceId={_id} />
           <Reviews serviceId={_id} />

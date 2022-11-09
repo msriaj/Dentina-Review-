@@ -18,8 +18,8 @@ const AddReviews = ({
   if (!user) {
     return (
       <div className="bg-red-50 p-6 font-bold">
-        For Added A Review!! You Have To Login First.
-        <Link className="text-sky-500 ml-2" to="login">
+        Please login to add a review !!!
+        <Link className="text-sky-500 ml-2" to="/login">
           Login Now
         </Link>
       </div>

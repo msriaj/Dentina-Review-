@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PhotoProvider } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 import Features from "../../Components/Features/Features";
 import Hero from "../../Components/Hero/Hero";
 import SingleService from "../../Components/SingelService/SingelService";
@@ -33,9 +34,11 @@ const Home = () => {
         </div>
       </PhotoProvider>
       <div className="text-center">
-        <button className="bg-blue-600 text-white py-2 px-5 rounded-md">
-          See All Services
-        </button>
+        <Link to="/services">
+          <button className="bg-blue-600 text-white py-2 px-5 rounded-md">
+            See All Services
+          </button>
+        </Link>
       </div>
     </>
   );

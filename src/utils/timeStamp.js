@@ -1,4 +1,4 @@
 import moment from "moment-timezone";
 
-export const timeStamp = (format) =>
-  moment.tz(Date.now(), "Asia/Dhaka").format(format);
+export const timeStamp = (oldDate, format) =>
+  moment.tz(oldDate, "Asia/Dhaka").format(format);

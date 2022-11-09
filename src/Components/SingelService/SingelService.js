@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PhotoView } from "react-photo-view";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-import { serverUrl } from "../../Context/AuthContext";
 
 const SingleService = ({ info }) => {
-  const { _id, title, descriptions, thumbURL, price } = info;
-  const [reviewsData, setReviews] = useState(null);
+  const { _id, title, descriptions, rate, totalRating, thumbURL, price } = info;
+  // const [reviewsData, setReviews] = useState(null);
 
-  useEffect(() => {
-    fetch(`${serverUrl}/rating/${_id}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${serverUrl}/rating/${_id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setReviews(data));
+  // }, []);
 
   return (
     <div>
@@ -32,27 +31,25 @@ const SingleService = ({ info }) => {
 
           <p className="text-gray-400">
             {descriptions
-              .replace("&nbsp;", " ")
               .replace(/(<([^>]+)>)/gi, " ")
+              .replace("&nbsp;", " ")
               .slice(0, 100)}
           </p>
           <div className="flex items-center mt-2.5 ">
-            {reviewsData && (
-              <ReactStars
-                count={5}
-                size={24}
-                value={reviewsData.avgRatingRound}
-                isHalf={true}
-                edit={false}
-                activeColor="#ffd700"
-              />
-            )}
+            <ReactStars
+              count={5}
+              size={24}
+              value={rate}
+              isHalf={true}
+              edit={false}
+              activeColor="#ffd700"
+            />
 
             <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-              {reviewsData?.avgRatingRound}/5
+              {rate}/5
             </span>
           </div>
-          <div className="mb-5">Total Rating: {reviewsData?.totalReviews}</div>
+          <div className="mb-5">Total Rating: {totalRating}</div>
           <div className="flex justify-between items-center">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
               ${price}

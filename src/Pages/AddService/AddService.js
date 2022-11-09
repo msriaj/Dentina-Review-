@@ -1,5 +1,6 @@
-import JoditEditor from "jodit-react";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
 import "./AddService.css";
@@ -8,7 +9,6 @@ const AddService = () => {
   const { user } = useContext(AuthContext);
   const [photolink, setPhotoLink] = useState(null);
 
-  const editor = useRef(null);
   const [content, setContent] = useState("");
 
   const handelSubmit = (e) => {
@@ -74,11 +74,10 @@ const AddService = () => {
                       Service Descriptions
                     </label>
                     <div className="mt-1 flex rounded-md shadow-sm">
-                      <JoditEditor
-                        ref={editor}
+                      <ReactQuill
+                        theme="snow"
                         value={content}
-                        tabIndex={1} // tabIndex of textarea
-                        onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                        onChange={setContent}
                       />
                     </div>
                   </div>

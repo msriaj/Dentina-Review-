@@ -3,6 +3,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
+import { formatDate } from "../../utils/dateFormat";
 
 const MyReview = () => {
   const { user } = useContext(AuthContext);
@@ -29,7 +30,6 @@ const MyReview = () => {
                     <tr>
                       <th className="p-2 whitespace-nowrap">
                         <div className="font-semibold text-left">
-                          {" "}
                           Service Details
                         </div>
                       </th>
@@ -67,7 +67,7 @@ const MyReview = () => {
                               <div className="flex">
                                 <ReactStars
                                   count={5}
-                                  size={6}
+                                  size={20}
                                   value={review.rating}
                                   isHalf={true}
                                   edit={false}
@@ -85,8 +85,7 @@ const MyReview = () => {
                           </td>
                           <td className="px-2 py-4 whitespace-nowrap">
                             <div className="text-left  ">
-                              {" "}
-                              {review.createdAt}
+                              {formatDate(review.createdAt)}
                             </div>
                           </td>
                           <td className="px-2 py-4 whitespace-nowrap">

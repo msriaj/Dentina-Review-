@@ -17,7 +17,7 @@ const ServiceDetails = () => {
     fetch(`${serverUrl}/review/${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, []);
+  }, [_id]);
 
   return (
     <div className="bg-blue-50 py-12">
@@ -40,7 +40,7 @@ const ServiceDetails = () => {
               </button>
 
               <span class="text-slate-400 font-medium">
-                9.5 •{reviewsData.length} reviews
+                {reviewsData.length} reviews
               </span>
             </div>
 

@@ -1,23 +1,17 @@
-import Lottie from "lottie-react";
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-
-import spin from "./spin.json";
+import { LoittaSpinner } from "../loader/LoittaSpinner";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   const { user, loading } = useContext(AuthContext);
 
+  console.log(loading);
+
   if (loading) {
-    return (
-      <div className="h-80 w-full flex justify-center items-center">
-        <div className="w-48">
-          <Lottie animationData={spin}></Lottie>
-        </div>
-      </div>
-    );
+    return <LoittaSpinner />;
   }
 
   if (user) {

@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { PhotoProvider } from "react-photo-view";
+import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
 import SingleService from "../../Components/SingelService/SingelService";
 import { serverUrl } from "../../Context/AuthContext";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${serverUrl}/services`)
       .then((res) => res.json())
-      .then((data) => setServices(data));
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) return <LoittaSpinner />;
 
   return (
     <div className="bg-blue-50">

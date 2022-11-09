@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
 import ReactTooltip from "react-tooltip";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -21,24 +21,41 @@ const Navbar = () => {
 
             <Link
               className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
+              to="/"
+            >
+              Home
+            </Link>
+
+            <Link
+              className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
+              to="/about"
+            >
+              About Me
+            </Link>
+
+            <Link
+              className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
               to="/services"
             >
               Services
             </Link>
 
-            <Link
-              className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
-              to="/addservices"
-            >
-              Add Services
-            </Link>
-            <Link
-              className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
-              to="/myreviews"
-            >
-              My eviews
-            </Link>
-
+            {user?.uid && (
+              <>
+                <Link
+                  className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
+                  to="/addservices"
+                >
+                  Add Services
+                </Link>
+                <Link
+                  className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
+                  to="/myreviews"
+                >
+                  My Reviews
+                </Link>
+              </>
+            )}
             <Link
               className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2  font-semibold text-sm"
               to="/blogs"

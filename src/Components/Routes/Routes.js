@@ -1,4 +1,5 @@
 import { serverUrl } from "../../Context/AuthContext";
+import About from "../../Pages/About/About";
 import AddService from "../../Pages/AddService/AddService";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Home from "../../Pages/Home/Home";
@@ -26,6 +27,11 @@ export const routes = createBrowserRouter([
         path: "/blogs",
         element: <Blogs />,
       },
+
+      {
+        path: "/about",
+        element: <About />,
+      },
       {
         path: "/login",
         element: <Login />,
@@ -43,7 +49,7 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/service/:id",
+        path: "/services/:id",
         element: <ServiceDetails />,
         loader: ({ params }) => fetch(`${serverUrl}/service/${params.id}`),
       },

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
+import { AuthContext, serverUrl } from "../../Context/AuthContext";
 
 const MyReview = () => {
+  const { user } = useContext(AuthContext);
+  const [reviewsData, setReviews] = useState(null);
+
+  useEffect(() => {
+    fetch(`${serverUrl}/myreview?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  }, [user]);
+
   return (
     <div className="bg-blue-50">
       <div className="md:w-8/12 mx-auto ">
@@ -17,14 +29,15 @@ const MyReview = () => {
                     <tr>
                       <th className="p-2 whitespace-nowrap">
                         <div className="font-semibold text-left">
-                          Service Name
+                          {" "}
+                          Service Details
                         </div>
                       </th>
                       <th className="p-2 whitespace-nowrap">
-                        <div className="font-semibold text-left">Review</div>
+                        <div className="font-semibold text-center">Review</div>
                       </th>
                       <th className="p-2 whitespace-nowrap">
-                        <div className="font-semibold text-left">Time</div>
+                        <div className="font-semibold text-center">Time</div>
                       </th>
                       <th className="p-2 whitespace-nowrap">
                         <div className="font-semibold text-center">Actions</div>
@@ -32,36 +45,58 @@ const MyReview = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    <tr>
-                      <td className="p-2 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-                            <img
-                              className="rounded"
-                              src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg"
-                              width="40"
-                              height="40"
-                              alt="Alex Shatov"
-                            />
-                          </div>
-                          <div className="font-medium text-gray-800">
-                            Alex Shatov
-                          </div>
-                        </div>
-                      </td>
-                      <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">alexshatov@gmail.com</div>
-                      </td>
-                      <td className="p-2 whitespace-nowrap">
-                        <div className="text-left  ">10/20/22</div>
-                      </td>
-                      <td className="p-2 whitespace-nowrap">
-                        <span className="flex   justify-center gap-3">
-                          <FaEdit className="text-green-600" />
-                          <FaTrash className="text-red-600" />
-                        </span>
-                      </td>
-                    </tr>
+                    {reviewsData &&
+                      reviewsData.map((review) => (
+                        <tr key={review._id} className="hover:bg-gray-100 ">
+                          <td className="px-2 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <img
+                                className="w-12 h-12 rounded shadow mr-2"
+                                src={review?.thumbURL}
+                                alt=""
+                              />
+                              <div className="font-medium text-gray-800">
+                                <Link to={`/services/${review.serviceId}`}>
+                                  {review?.serviceName}
+                                </Link>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-2 py-4 whitespace-nowrap">
+                            <div className="text-center flex flex-col items-center ">
+                              <div className="flex">
+                                <ReactStars
+                                  count={5}
+                                  size={6}
+                                  value={review.rating}
+                                  isHalf={true}
+                                  edit={false}
+                                  // emptyIcon={<i className="far fa-star"></i>}
+                                  // halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                  // fullIcon={<i className="fa fa-star"></i>}
+                                  activeColor="#ffd700"
+                                />
+                                <span className=" p-1 font-semibold">
+                                  ( {review.rating})
+                                </span>
+                              </div>
+                              {review.review}
+                            </div>
+                          </td>
+                          <td className="px-2 py-4 whitespace-nowrap">
+                            <div className="text-left  ">
+                              {" "}
+                              {review.createdAt}
+                            </div>
+                          </td>
+                          <td className="px-2 py-4 whitespace-nowrap">
+                            <span className="flex   justify-center gap-3">
+                              <FaEdit className="text-green-600" />
+                              <FaTrash className="text-red-600" />
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

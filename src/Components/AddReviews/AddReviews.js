@@ -1,13 +1,30 @@
 import React, { useContext, useState } from "react";
 import { FaNotesMedical } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
+import { timeStamp } from "../../utils/timeStamp";
 
-const AddReviews = ({ serviceId }) => {
+const AddReviews = ({
+  thumbURL,
+  title,
+  serviceId,
+  reviewsData,
+  handleReviewsData,
+}) => {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
-
+  if (!user) {
+    return (
+      <div className="bg-red-50 p-6 font-bold">
+        For Added A Review!! You Have To Login First.
+        <Link className="text-sky-500 ml-2" to="login">
+          Login Now
+        </Link>
+      </div>
+    );
+  }
   const submitHandler = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,6 +37,8 @@ const AddReviews = ({ serviceId }) => {
       email: user.email,
       profile: user.photoURL,
       rating,
+      thumbURL,
+      serviceName: title,
     };
 
     fetch(`${serverUrl}/review`, {
@@ -30,6 +49,11 @@ const AddReviews = ({ serviceId }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result.acknowledged) {
+          handleReviewsData([
+            { ...data, createdAt: timeStamp() },
+            ...reviewsData,
+          ]);
+          console.log(reviewsData);
           notify("Review Successfully submitted !");
           form.reset();
         }
@@ -43,7 +67,11 @@ const AddReviews = ({ serviceId }) => {
           <FaNotesMedical /> Write A Review
         </h1>
         <div className="flex">
-          <img src={user?.photoURL} alt="" className="rounded-full h-12" />
+          <img
+            src={user?.photoURL}
+            alt=""
+            className="rounded-full w-12 bg-gray-50 shadow border h-12"
+          />
           <div className="ml-2">
             <h2 className="text-gray-600 font-bold">{user?.displayName}</h2>
             <p className="text-gray-400">Posting Publicly</p>

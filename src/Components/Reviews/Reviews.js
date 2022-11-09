@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { serverUrl } from "../../Context/AuthContext";
+import React from "react";
 import Review from "../Review/Review";
 
-const Reviews = ({ serviceId }) => {
-  const [reviewsData, setReviews] = useState([]);
-
-  useEffect(() => {
-    fetch(`${serverUrl}/review/${serviceId}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
-
+const Reviews = ({ reviewsData }) => {
   console.log(reviewsData);
   if (!reviewsData) {
     return (
@@ -22,8 +13,11 @@ const Reviews = ({ serviceId }) => {
 
   return (
     <div className="pt-16">
-      {reviewsData.map((singelReview) => (
-        <Review key={singelReview._id} info={singelReview}></Review>
+      {reviewsData.map((singelReview, idx) => (
+        <Review
+          key={singelReview?._id ? singelReview?._id : idx}
+          info={singelReview}
+        ></Review>
       ))}
     </div>
   );

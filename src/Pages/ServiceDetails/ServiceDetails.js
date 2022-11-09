@@ -11,15 +11,11 @@ const ServiceDetails = () => {
         <div className="w-3/12"></div>
         <div className="w-9/12">
           <img src={thumbURL} alt="" className="w-full" />
-          <div className="border-b my-3">
-            <h1 className="text-2xl text-gray-800 font-bold">
-              <span className="text-gray-400">Service Name:</span> {title}
-            </h1>
+          <div className="  my-3">
+            <h1 className="text-2xl text-gray-600 font-bold">{title}</h1>
           </div>
-          <div className="border-b my-3">
-            <p className="text-gray-500">
-              <b>Descriptions :</b> {descriptions}
-            </p>
+          <div className="mb-12">
+            <p className="text-gray-500">{descriptions}</p>
           </div>
           <AddReviews serviceId={_id} />
           <Reviews serviceId={_id} />

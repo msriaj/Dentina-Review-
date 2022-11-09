@@ -1,84 +1,78 @@
-import React, { useContext } from "react";
-import { FaNotesMedical, FaRegStar, FaStarAndCrescent } from "react-icons/fa";
-import { AuthContext } from "../../Context/AuthContext";
+import React, { useContext, useState } from "react";
+import { FaNotesMedical } from "react-icons/fa";
+import ReactStars from "react-rating-stars-component";
+import { AuthContext, serverUrl } from "../../Context/AuthContext";
+import { notify } from "../../utils/notify";
 
-const AddReviews = () => {
+const AddReviews = ({ serviceId }) => {
   const { user } = useContext(AuthContext);
+  const [rating, setRating] = useState(0);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const review = form.reviewMsg.value;
+
+    const data = {
+      serviceId,
+      review,
+      userName: user.displayName,
+      profile: user.photoURL,
+      rating,
+    };
+
+    fetch(`${serverUrl}/review`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.acknowledged) {
+          notify("Review Successfully submitted !");
+          form.reset();
+        }
+      });
+  };
+
   return (
     <>
-      <h1 className="text-xl font-medium title-font mb-1 text-gray-600 flex items-center">
-        <FaNotesMedical /> Write A Review
-      </h1>
-      <div className="bg-gray-200 rounded-lg shadow">
-        <section className="text-gray-600 body-font relative">
-          <div className="container p-6  mx-auto">
-            <div className="mx-auto">
-              <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-1/2">
-                  <div className="relative">
-                    <label
-                      for="name"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      defaultValue={user?.displayName}
-                      className="w-full bg-white bg-opacity-50 rounded border border-gray-300 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                    />
-                  </div>
-                </div>
-                <div className="p-2 w-1/2">
-                  <div className="relative">
-                    <label
-                      for="email"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      defaultValue={user?.email}
-                      className="w-full bg-white bg-opacity-50 rounded border border-gray-300 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                    />
-                  </div>
-                </div>
-                <div className="p-2 w-full">
-                  <div className="relative">
-                    <label
-                      for="message"
-                      className="leading-7 text-sm text-gray-600"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      className="w-full bg-white bg-opacity-50 rounded border border-gray-300 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                    ></textarea>
-                  </div>
-                </div>
-                <div className="p-2 flex justify-center gap-2 w-full text-2xl text-yellow-600">
-                  <FaRegStar />
-                  <FaRegStar />
-                  <FaRegStar />
-                  <FaRegStar />
-                  <FaRegStar />
-                </div>
-                <div className="p-2 w-full">
-                  <button className="flex mx-auto text-white bg-sky-500 border-0 py-2 px-8 focus:outline-none hover:bg-sky-600 rounded text-lg">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
+      <div className="bg-white rounded-lg border shadow p-6">
+        <h1 className="text-xl   font-medium title-font mb-3 text-gray-600 flex items-center justify-center">
+          <FaNotesMedical /> Write A Review
+        </h1>
+        <div className="flex">
+          <img src={user?.photoURL} alt="" className="rounded-full h-12" />
+          <div className="ml-2">
+            <h2 className="text-gray-600 font-bold">{user?.displayName}</h2>
+            <p className="text-gray-400">Posting Publicly</p>
           </div>
-        </section>
+        </div>
+        <form onSubmit={submitHandler}>
+          <div className="flex justify-center">
+            <ReactStars
+              count={5}
+              size={60}
+              isHalf={true}
+              onChange={(e) => {
+                setRating(e);
+              }}
+              activeColor="#ffd700"
+            />
+          </div>
+          <div>
+            <textarea
+              name="reviewMsg"
+              placeholder="Share details of your own experience at this place"
+              className="border p-3 w-full outline-sky-300 h-[100px]"
+            ></textarea>
+          </div>
+          <div className="text-right">
+            <button className="bg-blue-600 rounded px-4 py-3 text-white mt-5">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

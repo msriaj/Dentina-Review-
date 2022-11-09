@@ -14,6 +14,9 @@ const ServiceDetails = () => {
           <div className="  my-3">
             <h1 className="text-2xl text-gray-600 font-bold">{title}</h1>
           </div>
+          <div>
+            <b className="font-bold">Price : {price}</b>
+          </div>
           <div className="mb-12">
             <p className="text-gray-500">{descriptions}</p>
           </div>

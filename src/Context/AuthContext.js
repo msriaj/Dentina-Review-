@@ -35,7 +35,7 @@ const UserContext = ({ children }) => {
   };
 
   const updateProfileInfo = (info) => {
-    updateProfile(auth.currentUser, info);
+    return updateProfile(auth.currentUser, info);
   };
 
   const googleSignIn = () => {
@@ -74,6 +74,7 @@ const UserContext = ({ children }) => {
     signInGithub,
     logOut,
     user,
+    setUser,
     loading,
     resetPass,
     updateProfileInfo,

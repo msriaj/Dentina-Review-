@@ -1,40 +1,54 @@
-import React, { useContext, useEffect } from "react";
 import Lottie from "lottie-react";
-import loginAnimation from "./login.json";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import React, { useContext, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
+import loginAnimation from "./login.json";
 
 const Login = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const nextUrl = location?.state?.from.pathname || "/";
 
-  const navigate = useNavigate();
+  const { user, signInEmail, googleSignIn } = useContext(AuthContext);
 
-  const { user, googleSignIn } = useContext(AuthContext);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signInEmail(email, password)
+      .then((user) => {
+        navigate(nextUrl);
+        notify("Login Successfully !!");
+      })
+      .catch((err) => notify(err.code, "error"));
+  };
 
   const googleSignHandler = () => {
     googleSignIn()
-      .then((result) => {
-        notify("Login successful !");
+      .then((user) => {
         navigate(nextUrl);
+        notify("Login Successfully !!");
       })
-      .catch((error) => {});
+      .catch((err) => notify(err.code, "error"));
   };
+
   useEffect(() => {
     if (user?.uid) {
-      navigate("/");
+      navigate(nextUrl);
     }
-  }, [navigate, user?.uid]);
+  }, [navigate, nextUrl, user?.uid]);
 
   return (
-    <div className="flex md:py-16 items-center">
+    <div className="flex md:py-16 items-center bg-blue-50">
       <div className="md:w-1/2 hidden md:block">
         <Lottie animationData={loginAnimation}> </Lottie>
       </div>
       <div className="w-full md:w-1/2 px-8 py-5 md:py-12 md:px-24">
-        <div className="flex flex-col  p-6  rounded-md sm:p-10 text-white bg-sky-500 shadow-lg border-2 border-sky-500 dark:bg-gray-900 dark:text-gray-100">
+        <div className="flex flex-col  p-6  rounded-md sm:p-10 text-gray-700 bg-white shadow-lg   dark:bg-gray-900 dark:text-gray-100">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Sign in</h1>
             <p className="text-sm dark:text-gray-400">
@@ -42,8 +56,7 @@ const Login = () => {
             </p>
           </div>
           <form
-            novalidate=""
-            action=""
+            onSubmit={submitHandler}
             className="space-y-12 ng-untouched ng-pristine ng-valid"
           >
             <div className="space-y-4">
@@ -84,27 +97,23 @@ const Login = () => {
             <div className="space-y-2">
               <div>
                 <button
-                  type="button"
-                  className="w-full px-8 py-3 font-semibold rounded-md bg-sky-900 dark:bg-sky-400 dark:text-gray-900"
+                  type="submit"
+                  className="w-full px-8 py-3 font-semibold rounded-md bg-blue-600 text-white dark:bg-sky-400 dark:text-gray-900"
                 >
                   Sign in
                 </button>
               </div>
               <p className="px-6 text-sm text-center dark:text-gray-400">
                 Don't have an account yet?
-                <a
-                  rel="noopener noreferrer"
-                  href="/"
-                  className="hover:underline dark:text-sky-400"
-                >
+                <Link to="/reg" className="hover:underline dark:text-sky-400">
                   Sign up
-                </a>
+                </Link>
                 .
               </p>
               <button
                 onClick={googleSignHandler}
                 type="button"
-                className="w-full px-8 py-3 font-semibold rounded-md bg-sky-900 dark:bg-sky-400 dark:text-gray-900"
+                className="w-full px-8 py-3 font-semibold rounded-md  bg-blue-600 text-white dark:bg-sky-400 dark:text-gray-900"
               >
                 Google Sign in
               </button>

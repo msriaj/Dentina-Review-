@@ -22,6 +22,7 @@ const MyReview = () => {
       .then((data) => setReviews(data));
   }, [token, user]);
 
+  //delete file
   const handleDelete = (id) => {
     const proceed = window.confirm(
       "Are you sure, you want to delete this review??"

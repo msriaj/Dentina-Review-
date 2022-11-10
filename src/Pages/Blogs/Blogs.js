@@ -15,7 +15,7 @@ const Blogs = () => {
               <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">
                 Difference between SQL and NoSQL
               </summary>
-              <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">
+              <p className="px-4 py-6 pt-0 ml-4 -mt-4   ">
                 SQL is the programming language used to interface with
                 relational databases. (Relational databases model data as
                 records in rows and tables with logical links between them).
@@ -27,7 +27,7 @@ const Blogs = () => {
               <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">
                 What is JWT, and how does it work?
               </summary>
-              <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-500 dark:text-gray-400">
+              <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-500   ">
                 What is JSON Web Token? JSON Web Token (JWT) is an open standard
                 (RFC 7519) that defines a compact and self-contained way for
                 securely transmitting information between parties as a JSON
@@ -48,7 +48,7 @@ const Blogs = () => {
               <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">
                 What is the difference between javascript and NodeJS?
               </summary>
-              <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">
+              <p className="px-4 py-6 pt-0 ml-4 -mt-4   ">
                 Node.js is a JavaScript runtime environment that achieves low
                 latency and high throughput by taking a “non-blocking” approach
                 to serving requests. In other words, Node.js wastes no time or
@@ -59,7 +59,7 @@ const Blogs = () => {
               <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">
                 How does NodeJS handle multiple requests at the same tim
               </summary>
-              <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">
+              <p className="px-4 py-6 pt-0 ml-4 -mt-4   ">
                 So the thread spend most of their time using 0% CPU waiting for
                 the database to return data. While doing so they have had to
                 allocate the memory required for a thread which includes a

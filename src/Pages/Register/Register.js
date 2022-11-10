@@ -52,14 +52,14 @@ const Register = () => {
             <div className="lg:w-1/2 hidden lg:block">
               <Lottie animationData={regnAnimation} />
             </div>
-            <div className="w-full lg:w-1/2 max-w-md p-8 space-y-3 bg-white rounded-xl shadow-xl dark:bg-gray-900 dark:text-gray-100">
+            <div className="w-full lg:w-1/2 max-w-md p-8 space-y-3 bg-white rounded-xl shadow-xl       ">
               <h1 className="text-2xl font-bold text-center">Sign Up </h1>
               <form
                 onSubmit={submitHandler}
                 className="space-y-6 ng-untouched ng-pristine ng-valid"
               >
                 <div className="space-y-1 text-sm">
-                  <label htmlFor="Name" className="block dark:text-gray-400">
+                  <label htmlFor="Name" className="block   ">
                     Full name
                   </label>
                   <input
@@ -67,12 +67,12 @@ const Register = () => {
                     name="name"
                     id="Name"
                     placeholder="Name"
-                    className="w-full px-4  py-3 rounded-md bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                    className="w-full px-4  py-3 rounded-md bg-gray-100            focus:dark:border-violet-400"
                     required
                   />
                 </div>
                 <div className="space-y-1 text-sm">
-                  <label htmlFor="Photo" className="block dark:text-gray-400">
+                  <label htmlFor="Photo" className="block   ">
                     Photo URL
                   </label>
                   <input
@@ -80,11 +80,11 @@ const Register = () => {
                     name="photo"
                     id="Photo"
                     placeholder="Photo"
-                    className="w-full px-4  py-3 rounded-md bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                    className="w-full px-4  py-3 rounded-md bg-gray-100            focus:dark:border-violet-400"
                   />
                 </div>
                 <div className="space-y-1 text-sm">
-                  <label htmlFor="email" className="block dark:text-gray-400">
+                  <label htmlFor="email" className="block   ">
                     Email
                   </label>
                   <input
@@ -92,15 +92,12 @@ const Register = () => {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    className="w-full px-4  py-3 rounded-md bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                    className="w-full px-4  py-3 rounded-md bg-gray-100            focus:dark:border-violet-400"
                     required
                   />
                 </div>
                 <div className="space-y-1 text-sm">
-                  <label
-                    htmlFor="password"
-                    className="block dark:text-gray-400"
-                  >
+                  <label htmlFor="password" className="block   ">
                     Password
                   </label>
                   <input
@@ -108,18 +105,18 @@ const Register = () => {
                     name="password"
                     id="password"
                     placeholder="Password"
-                    className="w-full px-4 py-3 rounded-md bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                    className="w-full px-4 py-3 rounded-md bg-gray-100            focus:dark:border-violet-400"
                     required
                   />
                 </div>
-                <button className="block w-full p-3 text-center   bg-blue-500 rounded-md text-white dark:text-gray-900 dark:bg-violet-400">
+                <button className="block w-full p-3 text-center   bg-blue-500 rounded-md text-white   dark:bg-violet-400">
                   Sign Up
                 </button>
               </form>
 
-              <p className="text-lg text-center sm:px-6 dark:text-gray-400">
+              <p className="text-lg text-center sm:px-6   ">
                 Already have an account?{" "}
-                <Link to="/login" className=" font-bold dark:text-gray-100">
+                <Link to="/login" className=" font-bold   ">
                   Sign In
                 </Link>
               </p>

@@ -36,7 +36,7 @@ const Profile = () => {
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                   Profile
                 </h3>
-                <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
+                <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12       ">
                   <img
                     src={user.uid && user?.photoURL}
                     alt=""
@@ -47,7 +47,7 @@ const Profile = () => {
                       <h2 className="text-xl font-semibold sm:text-2xl">
                         {user.uid && user?.displayName}
                       </h2>
-                      <p className="px-5 text-xs sm:text-base font-semibold dark:text-gray-400">
+                      <p className="px-5 text-xs sm:text-base font-semibold   ">
                         {user.uid && user?.email}
                       </p>
                     </div>

@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <header className="py-4 bg-white  text-gray-900    dark:bg-gray-800 dark:text-gray-100  ">
+      <header className="py-4 bg-white  text-gray-900          ">
         <div className="md:flex justify-between items-center md:w-10/12 md:mx-auto hidden">
           <div>
             <Link to="/" className="font-bold text-xl text-sky-500 mr-3">

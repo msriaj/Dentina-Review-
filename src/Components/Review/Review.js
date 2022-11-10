@@ -11,10 +11,10 @@ const Review = ({ info }) => {
           src={profile}
           alt=""
         />
-        <div className="space-y-1 font-medium dark:text-white">
+        <div className="space-y-1 font-medium   ">
           <p>
             {userName}
-            <time className="block text-sm text-gray-500 dark:text-gray-400">
+            <time className="block text-sm text-gray-500   ">
               Posted On {formatDate(createdAt)}
             </time>
           </p>
@@ -31,9 +31,7 @@ const Review = ({ info }) => {
         />
       </div>
 
-      <p className="mb-2 font-light text-gray-500 dark:text-gray-400">
-        {review}
-      </p>
+      <p className="mb-2 font-light text-gray-500   ">{review}</p>
     </div>
   );
 };

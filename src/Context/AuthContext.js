@@ -21,6 +21,8 @@ const googleProvider = new GoogleAuthProvider();
 const gitHubProvider = new GithubAuthProvider();
 
 const UserContext = ({ children }) => {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -67,8 +69,6 @@ const UserContext = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -93,6 +93,7 @@ const UserContext = ({ children }) => {
     updateProfileInfo,
     token,
     createToken,
+    setToken,
   };
 
   return (

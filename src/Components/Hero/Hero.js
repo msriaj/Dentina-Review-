@@ -5,7 +5,7 @@ import doctor from "././doctor.json";
 
 const Hero = () => {
   return (
-    <section className="   dark:bg-gray-800 dark:text-gray-100 rounded-lg">
+    <section className="  rounded-lg">
       <div className="md:w-10/12 mx-auto">
         <div className="container  flex flex-col justify-between   mx-auto sm:py-12 lg:py-48 lg:flex-row lg:justify-between">
           <div className="flex flex-col justify-center py-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">

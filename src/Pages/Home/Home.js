@@ -4,6 +4,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
 import Features from "../../Components/Features/Features";
 import Hero from "../../Components/Hero/Hero";
+import { Page } from "../../Components/Page";
 import SingleService from "../../Components/SingelService/SingelService";
 import { serverUrl } from "../../Context/AuthContext";
 
@@ -17,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <Page title="Home Page">
       <Hero></Hero>
 
       <Features />
@@ -40,7 +41,7 @@ const Home = () => {
           </button>
         </Link>
       </div>
-    </>
+    </Page>
   );
 };
 

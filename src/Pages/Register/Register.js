@@ -1,6 +1,8 @@
+import Lottie from "lottie-react";
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import regnAnimation from "./Reg.json";
 
 const Register = () => {
   const { setUser, createUser, updateProfileInfo } = useContext(AuthContext);
@@ -37,7 +39,7 @@ const Register = () => {
       <div className="bg-blue-50">
         <div className="flex flex-col p-12 justify-center items-center lg:flex-row  lg:w-10/12 mx-auto lg:py-20 lg:gap-12">
           <div className="lg:w-1/2 hidden lg:block">
-            {/* <img src={img} alt="" /> */}
+            <Lottie animationData={regnAnimation} />
           </div>
           <div className="w-full lg:w-1/2 max-w-md p-8 space-y-3 bg-white rounded-xl shadow-xl dark:bg-gray-900 dark:text-gray-100">
             <h1 className="text-2xl font-bold text-center">Sign Up </h1>

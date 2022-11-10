@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
+import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { formatDate } from "../../utils/dateFormat";
-import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
 import { notify } from "../../utils/notify";
 
 const MyReview = () => {
@@ -34,6 +34,7 @@ const MyReview = () => {
       .then((result) => {
         if (result.acknowledged) {
           notify("Delete Successfully !", "error");
+          setReviews(reviewsData.filter((freview) => freview._id !== id));
         }
       });
   };
@@ -113,12 +114,12 @@ const MyReview = () => {
                           <td className="px-2 py-4 whitespace-nowrap">
                             <span className="flex   justify-center gap-3">
                               <Link to={`/editreview/${review._id}`}>
-                                <FaEdit className="text-green-600" />
+                                <FaEdit className="text-green-600 cursor-pointer" />
                               </Link>
 
                               <FaTrash
                                 onClick={() => delteHandler(review._id)}
-                                className="text-red-600"
+                                className="text-red-600 cursor-pointer"
                               />
                             </span>
                           </td>

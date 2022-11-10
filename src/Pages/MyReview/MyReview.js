@@ -6,14 +6,22 @@ import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { formatDate } from "../../utils/dateFormat";
 
 const MyReview = () => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const [reviewsData, setReviews] = useState(null);
 
   useEffect(() => {
-    fetch(`${serverUrl}/myreview?email=${user?.email}`)
+    fetch(`${serverUrl}/myreview?email=${user?.email}`, {
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, [user]);
+  }, [token, user]);
+
+  const delteHandler = () => {
+    console.log("d clicked");
+  };
 
   return (
     <div className="bg-blue-50">
@@ -71,9 +79,6 @@ const MyReview = () => {
                                   value={review.rating}
                                   isHalf={true}
                                   edit={false}
-                                  // emptyIcon={<i className="far fa-star"></i>}
-                                  // halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                  // fullIcon={<i className="fa fa-star"></i>}
                                   activeColor="#ffd700"
                                 />
                                 <span className=" p-1 font-semibold">
@@ -90,7 +95,10 @@ const MyReview = () => {
                           </td>
                           <td className="px-2 py-4 whitespace-nowrap">
                             <span className="flex   justify-center gap-3">
-                              <FaEdit className="text-green-600" />
+                              <Link to={`/editreview/${review._id}`}>
+                                <FaEdit className="text-green-600" />
+                              </Link>
+
                               <FaTrash className="text-red-600" />
                             </span>
                           </td>

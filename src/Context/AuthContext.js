@@ -14,7 +14,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { app } from "./firebase.config";
 
 export const AuthContext = createContext();
-export const serverUrl = "https://dentina-msriaj.vercel.app";
+export const serverUrl = "http://localhost:5000";
 const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
@@ -43,6 +43,17 @@ const UserContext = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const createToken = async (email) => {
+    const data = await fetch(`${serverUrl}/create-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+    return await data.json();
+  };
+
   const signInGithub = () => {
     setLoading(true);
     return signInWithPopup(auth, gitHubProvider);
@@ -55,6 +66,8 @@ const UserContext = ({ children }) => {
   const resetPass = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -78,6 +91,8 @@ const UserContext = ({ children }) => {
     loading,
     resetPass,
     updateProfileInfo,
+    token,
+    createToken,
   };
 
   return (

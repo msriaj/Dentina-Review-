@@ -6,7 +6,7 @@ import { notify } from "../../utils/notify";
 import "./AddService.css";
 
 const AddService = () => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const [photolink, setPhotoLink] = useState(null);
 
   const [content, setContent] = useState("");
@@ -23,11 +23,15 @@ const AddService = () => {
       descriptions: content,
       thumbURL,
       price,
+      email: user.email,
     };
 
     fetch(`${serverUrl}/addservice`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
@@ -35,6 +39,7 @@ const AddService = () => {
         if (result.acknowledged) {
           notify("Successfully submitted !");
           form.reset();
+          setContent("");
           setPhotoLink(null);
         }
       });
@@ -68,7 +73,7 @@ const AddService = () => {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="pb-12">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Service Descriptions

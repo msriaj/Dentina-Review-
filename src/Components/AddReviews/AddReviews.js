@@ -4,7 +4,6 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
-import { timeStamp } from "../../utils/timeStamp";
 
 const AddReviews = ({
   thumbURL,
@@ -13,7 +12,8 @@ const AddReviews = ({
   reviewsData,
   handleReviewsData,
 }) => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
+
   const [rating, setRating] = useState(0);
   if (!user) {
     return (
@@ -43,14 +43,17 @@ const AddReviews = ({
 
     fetch(`${serverUrl}/review`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((result) => {
         if (result.acknowledged) {
           handleReviewsData([
-            { ...data, createdAt: timeStamp() },
+            { ...data, createdAt: new Date() },
             ...reviewsData,
           ]);
           console.log(reviewsData);

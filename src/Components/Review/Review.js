@@ -1,5 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
+import { formatDate } from "../../utils/dateFormat";
 const Review = ({ info }) => {
   const { profile, rating, review, userName, createdAt } = info;
   return (
@@ -14,7 +15,7 @@ const Review = ({ info }) => {
           <p>
             {userName}
             <time className="block text-sm text-gray-500 dark:text-gray-400">
-              Posted On {createdAt?.split("T")[0]}
+              Posted On {formatDate(createdAt)}
             </time>
           </p>
         </div>
@@ -26,9 +27,6 @@ const Review = ({ info }) => {
           value={rating}
           isHalf={true}
           edit={false}
-          // emptyIcon={<i className="far fa-star"></i>}
-          // halfIcon={<i className="fa fa-star-half-alt"></i>}
-          // fullIcon={<i className="fa fa-star"></i>}
           activeColor="#ffd700"
         />
       </div>

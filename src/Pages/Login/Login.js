@@ -11,7 +11,8 @@ const Login = () => {
   const location = useLocation();
   const nextUrl = location?.state?.from.pathname || "/";
 
-  const { user, signInEmail, googleSignIn } = useContext(AuthContext);
+  const { user, signInEmail, googleSignIn, createToken } =
+    useContext(AuthContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -29,9 +30,13 @@ const Login = () => {
 
   const googleSignHandler = () => {
     googleSignIn()
-      .then((user) => {
-        navigate(nextUrl);
-        notify("Login Successfully !!");
+      .then(async (data) => {
+        const token = await createToken(data.user.email);
+        if (token) {
+          localStorage.setItem("token", token.token);
+          navigate(nextUrl);
+          notify("Login Successfully !!");
+        }
       })
       .catch((err) => notify(err.code, "error"));
   };

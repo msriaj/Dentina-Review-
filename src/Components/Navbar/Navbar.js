@@ -7,8 +7,8 @@ import { AuthContext } from "../../Context/AuthContext";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const logOutHandler = () => {
-    console.log("logout clicked");
     logOut();
+    localStorage.setItem("token", "");
   };
   return (
     <div>

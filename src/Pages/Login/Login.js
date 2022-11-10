@@ -1,7 +1,8 @@
 import Lottie from "lottie-react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
 import { Page } from "../../Components/Page";
 import { AuthContext } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
@@ -15,7 +16,10 @@ const Login = () => {
   const { user, signInEmail, googleSignIn, createToken, setToken } =
     useContext(AuthContext);
 
+  const [sping, setSping] = useState(false);
+
   const submitHandler = (e) => {
+    setSping(true);
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -23,19 +27,25 @@ const Login = () => {
 
     signInEmail(email, password)
       .then((user) => {
+        setSping(false);
         navigate(nextUrl);
         notify("Login Successfully !!");
       })
-      .catch((err) => notify(err.code, "error"));
+      .catch((err) => {
+        setSping(false);
+        notify(err.code, "error");
+      });
   };
 
   const googleSignHandler = () => {
+    setSping(true);
     googleSignIn()
       .then(async (data) => {
         const token = await createToken(data.user.email);
         if (token) {
           localStorage.setItem("token", token.token);
           setToken(token.token);
+          setSping(true);
           navigate(nextUrl);
           notify("Login Successfully !!");
         }
@@ -49,7 +59,9 @@ const Login = () => {
     }
   }, [navigate, nextUrl, user?.uid]);
 
-  return (
+  return sping ? (
+    <LoittaSpinner />
+  ) : (
     <Page title="Login">
       <div className="flex md:py-16 items-center bg-blue-50">
         <div className="md:w-1/2 hidden md:block">

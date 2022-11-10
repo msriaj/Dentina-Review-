@@ -4,6 +4,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
 import Features from "../../Components/Features/Features";
 import Hero from "../../Components/Hero/Hero";
+import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
 import { Page } from "../../Components/Page";
 import SingleService from "../../Components/SingelService/SingelService";
 import { serverUrl } from "../../Context/AuthContext";
@@ -11,13 +12,20 @@ import { serverUrl } from "../../Context/AuthContext";
 const Home = () => {
   const [services, setServices] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch(`${serverUrl}/services?limit=3`)
       .then((res) => res.json())
-      .then((data) => setServices(data));
+      .then((data) => {
+        setLoading(false);
+        setServices(data);
+      });
   }, []);
 
-  return (
+  return loading ? (
+    <LoittaSpinner />
+  ) : (
     <Page title="Home Page">
       <Hero></Hero>
 

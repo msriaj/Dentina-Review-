@@ -1,6 +1,6 @@
 # Project Title
 
-Skill Up - Course System
+Dentina - For Dentist Services And Review
 
 ## Demo link:
 
@@ -46,7 +46,6 @@ Access my site at [Live Link ](https://service-review-ms.web.app/).
 ## Screenshots
 
 ![Writing](https://i.ibb.co/9ZD7LWF/screencapture-service-review-ms-web-app-2022-11-10-21-57-30.jpg)
-![Writing](https://i.ibb.co/Zf7NRDr/screencapture-service-review-ms-web-app-services-2022-11-10-21-57-42.jpg)
 ![Writing](https://i.ibb.co/Z1ZpRJT/screencapture-service-review-ms-web-app-login-2022-11-10-21-57-56.jpg)
 ![Writing](https://i.ibb.co/pzj9VpK/screencapture-service-review-ms-web-app-reg-2022-11-10-21-58-02.jpg)
 

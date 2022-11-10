@@ -1,0 +1,7 @@
+.service-deatils h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(121, 118, 118);
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}

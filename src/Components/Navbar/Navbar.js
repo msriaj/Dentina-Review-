@@ -28,13 +28,6 @@ const Navbar = () => {
 
             <Link
               className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
-              to="/about"
-            >
-              About Me
-            </Link>
-
-            <Link
-              className="py-2 rounded-lg hover:text-sky-600 hover:bg-white px-2 font-semibold text-sm "
               to="/services"
             >
               Services

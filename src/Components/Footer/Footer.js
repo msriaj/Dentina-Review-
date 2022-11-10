@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="md:w-10/12 mx-auto">
-      <section className="py-10 bg-gray-50 sm:pt-16 lg:pt-24">
+    <div className=" bg-gray-50">
+      <section className="py-10 md:w-10/12 mx-auto  sm:pt-16 lg:pt-24">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
             <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-              <img
-                className="w-auto h-9"
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                alt=""
-              />
+              <h2 className="text-xl font-bold text-blue-600">Dentaina </h2>
 
               <p className="text-base leading-relaxed text-gray-600 mt-7">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
+                Dentainais a friendly and dedicated general and cosmetic dentist
+                based in Bangladesh. (Dentaina pursued his undergraduate career
+                at the University of Dhaka at Dhaka.
               </p>
 
               <ul className="flex items-center space-x-3 mt-9">
@@ -98,104 +96,41 @@ const Footer = () => {
 
             <div>
               <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">
-                Company
+                Pages
               </p>
 
               <ul className="mt-6 space-y-4">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/"
                     title=""
                     className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
                     {" "}
-                    About{" "}
-                  </a>
+                    Home
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/services"
                     title=""
                     className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
                     {" "}
-                    Features{" "}
-                  </a>
+                    Services
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/reg"
                     title=""
                     className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
                     {" "}
-                    Works{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Career{" "}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">
-                Help
-              </p>
-
-              <ul className="mt-6 space-y-4">
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Customer Support{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Delivery Details{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Terms & Conditions{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Privacy Policy{" "}
-                  </a>
+                    SignUp
+                  </Link>
                 </li>
               </ul>
             </div>

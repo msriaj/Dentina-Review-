@@ -1,6 +1,7 @@
-import React from "react";
-import doctor from "././doctor.json";
 import Lottie from "lottie-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import doctor from "././doctor.json";
 
 const Hero = () => {
   return (
@@ -18,20 +19,19 @@ const Hero = () => {
               Dictum aliquam porta in condimentum ac integer
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-              <a
-                rel="noopener noreferrer"
-                href="/"
+              <Link
+                to="/services"
                 className="px-8 py-3 text-lg font-semibold rounded bg-sky-400 text-white dark:text-gray-900"
               >
                 Services
-              </a>
-              <a
-                rel="noopener noreferrer"
-                href="/"
+              </Link>
+
+              <Link
+                to="/reg"
                 className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-100"
               >
                 Signup
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">

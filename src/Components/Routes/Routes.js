@@ -1,8 +1,8 @@
 import { serverUrl } from "../../Context/AuthContext";
-import About from "../../Pages/About/About";
 import AddService from "../../Pages/AddService/AddService";
 import Blogs from "../../Pages/Blogs/Blogs";
 import EditReview from "../../Pages/EditReview/EditReview";
+import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import MyReview from "../../Pages/MyReview/MyReview";
@@ -29,10 +29,6 @@ export const routes = createBrowserRouter([
         element: <Blogs />,
       },
 
-      {
-        path: "/about",
-        element: <About />,
-      },
       {
         path: "/login",
         element: <Login />,
@@ -85,5 +81,6 @@ export const routes = createBrowserRouter([
           fetch(`${serverUrl}/reviewdetails/${params.id}`),
       },
     ],
+    errorElement: <Error />,
   },
 ]);

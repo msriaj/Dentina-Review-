@@ -4,6 +4,8 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { formatDate } from "../../utils/dateFormat";
+import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
+import { notify } from "../../utils/notify";
 
 const MyReview = () => {
   const { user, token } = useContext(AuthContext);
@@ -19,9 +21,24 @@ const MyReview = () => {
       .then((data) => setReviews(data));
   }, [token, user]);
 
-  const delteHandler = () => {
-    console.log("d clicked");
+  const delteHandler = (id) => {
+    fetch(`${serverUrl}/myreview`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.acknowledged) {
+          notify("Delete Successfully !", "error");
+        }
+      });
   };
+
+  if (!reviewsData) <LoittaSpinner></LoittaSpinner>;
 
   return (
     <div className="bg-blue-50">
@@ -99,7 +116,10 @@ const MyReview = () => {
                                 <FaEdit className="text-green-600" />
                               </Link>
 
-                              <FaTrash className="text-red-600" />
+                              <FaTrash
+                                onClick={() => delteHandler(review._id)}
+                                className="text-red-600"
+                              />
                             </span>
                           </td>
                         </tr>

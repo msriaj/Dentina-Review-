@@ -1,11 +1,12 @@
 import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import ReactStars from "react-rating-stars-component";
 import { useLoaderData } from "react-router-dom";
 import AddReviews from "../../Components/AddReviews/AddReviews";
 import Reviews from "../../Components/Reviews/Reviews";
 import { serverUrl } from "../../Context/AuthContext";
-
+import "./style.css";
 const ServiceDetails = () => {
   const { _id, title, descriptions, thumbURL, price, rate, totalRating } =
     useLoaderData();
@@ -24,7 +25,11 @@ const ServiceDetails = () => {
   return (
     <div className="bg-blue-50 py-12">
       <div className="md:w-7/12 mx-auto bg-white rounded-md p-6 ">
-        <img src={thumbURL} alt="" className="w-full rounded-lg mt-2" />
+        <PhotoProvider>
+          <PhotoView src={thumbURL}>
+            <img src={thumbURL} alt="" className="w-full rounded-lg mt-2" />
+          </PhotoView>
+        </PhotoProvider>
         <div className="mb-3 mt-5">
           <h1 className="text-2xl text-gray-600 font-bold">{title}</h1>
         </div>
@@ -53,7 +58,7 @@ const ServiceDetails = () => {
             </div>
           </div>
         </div>
-        <div className="mb-12">
+        <div className="mb-12 service-deatils">
           <p className="text-gray-500">{parse(descriptions)}</p>
         </div>
         <AddReviews

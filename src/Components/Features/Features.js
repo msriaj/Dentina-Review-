@@ -4,7 +4,7 @@ import { FaMagnet, FaThumbsUp, FaUserInjured } from "react-icons/fa";
 const Features = () => {
   return (
     <div className="bg-blue-50">
-      <div className="  md:w-10/12 md:mx-auto">
+      <div className="mx-8 md:w-10/12 md:mx-auto">
         <section className=" pt-8 ">
           <div className=" container mx-auto">
             <div className="-mx-4 flex flex-wrap">

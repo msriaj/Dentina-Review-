@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FaNotesMedical } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext, serverUrl } from "../../Context/AuthContext";
 import { notify } from "../../utils/notify";
 
@@ -13,13 +13,19 @@ const AddReviews = ({
   handleReviewsData,
 }) => {
   const { user, token } = useContext(AuthContext);
+  const location = useLocation();
 
   const [rating, setRating] = useState(0);
   if (!user) {
     return (
       <div className="bg-red-50 p-6 font-bold">
         Please login to add a review !!!
-        <Link className="text-sky-500 ml-2" to="/login">
+        <Link
+          to={"/login"}
+          state={{ from: location }}
+          replace
+          className="text-sky-500 ml-2"
+        >
           Login Now
         </Link>
       </div>
@@ -41,7 +47,7 @@ const AddReviews = ({
       serviceName: title,
     };
 
-    fetch(`${serverUrl}/review`, {
+    fetch(`${serverUrl}/add-review`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

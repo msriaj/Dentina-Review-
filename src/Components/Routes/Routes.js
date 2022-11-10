@@ -78,7 +78,7 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`${serverUrl}/reviewdetails/${params.id}`),
+          fetch(`${serverUrl}/review-details/${params.id}`),
       },
     ],
     errorElement: <Error />,

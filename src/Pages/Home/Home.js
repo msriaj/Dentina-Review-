@@ -28,7 +28,7 @@ const Home = () => {
         </h2>
       </div>
       <PhotoProvider>
-        <div className="md:w-10/12 mx-auto py-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="md:w-10/12 mx-8 md:mx-auto py-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {services?.map((service) => (
             <SingleService key={service._id} info={service} />
           ))}

@@ -9,7 +9,8 @@ import { formatDate } from "../../utils/dateFormat";
 import { notify } from "../../utils/notify";
 
 const MyReview = () => {
-  const { user, token } = useContext(AuthContext);
+  const [spining, setSpining] = useState(true);
+  const { user, token, logOut } = useContext(AuthContext);
   const [reviewsData, setReviews] = useState(null);
 
   useEffect(() => {
@@ -18,9 +19,17 @@ const MyReview = () => {
         authorization: "Bearer " + token,
       },
     })
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, [token, user]);
+      .then((res) => {
+        if (res.status === 500) {
+          notify("Something went Wrong!!", "error");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setReviews(data);
+        setSpining(false);
+      });
+  }, [logOut, token, user]);
 
   //delete file
   const handleDelete = (id) => {
@@ -46,7 +55,7 @@ const MyReview = () => {
     }
   };
 
-  if (!reviewsData) <LoittaSpinner></LoittaSpinner>;
+  if (spining) <LoittaSpinner></LoittaSpinner>;
 
   return (
     <Page title="My Reviews">
@@ -59,7 +68,7 @@ const MyReview = () => {
               </header>
               {reviewsData?.length === 0 ? (
                 <div className="bg-red-50 text-center font-bold py-5">
-                  You dont have any reviews!!!
+                  You don't have any reviews!!!
                 </div>
               ) : (
                 <div className="p-3">
@@ -90,61 +99,60 @@ const MyReview = () => {
                         </tr>
                       </thead>
                       <tbody className="text-sm divide-y divide-gray-100">
-                        {reviewsData &&
-                          reviewsData.map((review) => (
-                            <tr key={review._id} className="hover:bg-gray-100 ">
-                              <td className="px-2 py-4 whitespace-nowrap">
-                                <div className="flex items-center">
-                                  <img
-                                    className="w-12 h-12 rounded shadow mr-2 hidden md:block"
-                                    src={review?.thumbURL}
-                                    alt=""
-                                  />
-                                  <div className="font-medium text-gray-800">
-                                    <Link to={`/services/${review.serviceId}`}>
-                                      {review?.serviceName}
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap">
-                                <div className="text-center flex flex-col items-center ">
-                                  <div className="flex">
-                                    <ReactStars
-                                      count={5}
-                                      size={20}
-                                      value={review.rating}
-                                      isHalf={true}
-                                      edit={false}
-                                      activeColor="#ffd700"
-                                      classNames="hidden md:block"
-                                    />
-                                    <span className=" p-1 font-semibold">
-                                      ( {review.rating})
-                                    </span>
-                                  </div>
-                                  {review.review}
-                                </div>
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap">
-                                <div className="text-left  ">
-                                  {formatDate(review.createdAt)}
-                                </div>
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap">
-                                <span className="flex   justify-center gap-3">
-                                  <Link to={`/editreview/${review._id}`}>
-                                    <FaEdit className="text-green-600 cursor-pointer" />
+                        {reviewsData?.map((review) => (
+                          <tr key={review._id} className="hover:bg-gray-100 ">
+                            <td className="px-2 py-4 whitespace-nowrap">
+                              <div className="flex items-center">
+                                <img
+                                  className="w-12 h-12 rounded shadow mr-2 hidden md:block"
+                                  src={review?.thumbURL}
+                                  alt=""
+                                />
+                                <div className="font-medium text-gray-800">
+                                  <Link to={`/services/${review.serviceId}`}>
+                                    {review?.serviceName}
                                   </Link>
-
-                                  <FaTrash
-                                    onClick={() => handleDelete(review._id)}
-                                    className="text-red-600 cursor-pointer"
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap">
+                              <div className="text-center flex flex-col items-center ">
+                                <div className="flex">
+                                  <ReactStars
+                                    count={5}
+                                    size={20}
+                                    value={review.rating}
+                                    isHalf={true}
+                                    edit={false}
+                                    activeColor="#ffd700"
+                                    classNames="hidden md:block"
                                   />
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
+                                  <span className=" p-1 font-semibold">
+                                    ( {review.rating})
+                                  </span>
+                                </div>
+                                {review.review}
+                              </div>
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap">
+                              <div className="text-left  ">
+                                {formatDate(review.createdAt)}
+                              </div>
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap">
+                              <span className="flex   justify-center gap-3">
+                                <Link to={`/editreview/${review._id}`}>
+                                  <FaEdit className="text-green-600 cursor-pointer" />
+                                </Link>
+
+                                <FaTrash
+                                  onClick={() => handleDelete(review._id)}
+                                  className="text-red-600 cursor-pointer"
+                                />
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>

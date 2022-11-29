@@ -18,9 +18,7 @@ const Features = () => {
                   </h4>
                   <p className="text-body-color">
                     Awesome Technology operates as a specialist in the field of
-                    making digital dentistry a reality for many clinics, labs
-                    and organisations through supplying 3D equipment, software
-                    and know how built from the inception of the sector.
+                    making digital dentistry a reality for many clinics, labs.
                   </p>
                 </div>
               </div>
@@ -48,8 +46,7 @@ const Features = () => {
                   </h4>
                   <p className="text-body-color">
                     A satisfaction guarantee is a promise a brand makes to
-                    assure a buyer that a refund will be issued if the buyer is
-                    not satisfied with a
+                    assure a buyer that a refund will be issued.
                   </p>
                 </div>
               </div>

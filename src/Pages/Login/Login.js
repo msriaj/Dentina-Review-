@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
 import React, { useContext, useEffect, useState } from "react";
+import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { LoittaSpinner } from "../../Components/loader/LoittaSpinner";
@@ -121,9 +122,12 @@ const Login = () => {
                     Sign in
                   </button>
                 </div>
-                <p className="px-6 text-sm text-center   ">
+                <p className="px-6 text-sm text-center  pb-5 ">
                   Don't have an account yet?
-                  <Link to="/reg" className="hover:underline dark:text-sky-400">
+                  <Link
+                    to="/reg"
+                    className="hover:underline dark:text-sky-400 ml-2"
+                  >
                     Sign up
                   </Link>
                   .
@@ -131,9 +135,9 @@ const Login = () => {
                 <button
                   onClick={googleSignHandler}
                   type="button"
-                  className="w-full px-8 py-3 font-semibold rounded-md  bg-blue-600 text-white dark:bg-sky-400  "
+                  className="w-full flex items-center justify-center gap-2 px-8 py-3 font-bold rounded-md  bg-gray-50 md:w-4/6 mx-auto border text-green-600   "
                 >
-                  Google Sign in
+                  <FaGoogle /> Google Sign in
                 </button>
               </div>
             </form>
